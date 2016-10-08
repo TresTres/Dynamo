@@ -3,10 +3,10 @@
 function Magro(name,deadline,startDate,importance)
 {
   //pertinent information about our magro
-  this.name = name;
-  this.deadline = deadline;
-  this.startDate = startDate;
-  this.importance = importance;
+  this.name = name;//string
+  this.deadline = deadline;//string
+  this.startDate = startDate;//string
+  this.importance = importance;//string
   //rank from 1 to 10
   //1 is the highest 
   this.finished = false;
@@ -42,12 +42,20 @@ function Magro(name,deadline,startDate,importance)
     task['message'] = message;
     task['number'] = this.numTasks+1; //start counting at one
     this.numTasks++;
-    //when did we finish?
+    //when did we finish this task?
     var now = new Date();
     task['commitTime'] = now.toString();
     
     this.taskList.push(task);
+    return "Task added!";
   }
+
+  this.finishMagro= function()
+  {
+    this.finished = true;
+    return "You're all done!";
+  }
+  
 
   //relate this magro to other magros
  // this.upper = null;
@@ -60,4 +68,6 @@ var now = new Date();
 var deadline = new Date();
 deadline.setHours(now.getHours()+1);
 
-var sampleMagro = new Magro("Make my first magro",deadline.toString(), now.toString(), 1); 
+var sampleMagro = new Magro("Make my first magro",deadline.toString(), now.toString(), 1);
+
+
