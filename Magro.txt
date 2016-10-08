@@ -1,0 +1,123 @@
+MAGRO, an app 
+------------
+Responsiblities:
+-Provide a central app to keep track of all major tasks or "macros"
+-Keep track of tasks completed for the day and total tasks performed to meet an objective
+-Establish a priority "tree" every day of macros to progress in
+------------
+Features:
+	The Macro
+		The macro is a representation of a major task that needs to be
+		completed/has a deadline.  This could be writing a research 
+		paper, or finishing a problem set, or repairing the gutter,
+		or taking the GRE, or filing taxes for the year.
+			
+		The main characteristic that defines a macro is that it may
+		take more than one sitting to complete.  We could make a
+		homework assignment a macro too, but in this case it would be a
+		trivial form of a macro - you could finish it in 30 minutes.
+
+		Macros may have deadlines, and ideally you do a little bit to 
+		complete a macro each day.  The idea behind the app stems from
+		the commit message in git pushes.  Each time you push, you 
+		detail what was changed and what was added - contributing to a 
+		log that details the lifetime of the project.  However, there's
+		no need to limit this mechanism to coding projects or projects
+		that need digital files.
+  	
+	The Priority Tree
+		The priority tree is a tree of macros that wish to be completed.
+		We wish to establish a hierarchy of these macros to show what 
+		takes precedence.  For example, Oswald wants to publish a 
+		personal webpage eventually, but his lab report in Chemistry
+		needs to be completed in a week.  Obviously, Oswald's lab report		
+		should take priority, and should be completed first.  Thus, we 
+		need to implement a Priority Ranking System.
+		
+		In addition, some tasks have equal priority. Let's say Sanjita 
+		has to prepare a presentation for Business Class in three days
+		and also has an Accounting assignment due on the same date.
+		In this case, both macros would have equal priority.
+		Thus, if Sanjita doesn't want to work on the Accounting 
+		assignment, the app should allow her to switch it instead with 
+		the Business presentation.
+
+		Reordering the priority tree should be made difficult, but not 
+		impossible.  In this sense, we should implement some sort of 
+		behavior analysis.  More on this later. 
+
+	Day Cycle
+		People who could benefit from this app most likely are motivated
+		to get something accomplished every day.  Every 24 hours, the 	
+		app should provide a visual representation of the priority tree.
+		(Or at least the first 3 tiers) "This is your to-do list."
+		"Get something done in this and that project before going to
+		bed."  
+
+	Hour/Minute Cycle
+		People who run on scheudles often set time limits on the tasks 
+		they do.  "I'll set aside an hour to study Signal Processing."
+		"I'll take 45 minutes to write a page of this essay."
+		Simply put, the app should have a way to make this possible.
+		"Okay, I'll check back at around 2 pm"
+
+	Recording Progress
+		Harkening back to the commit message from git, at the end of the
+ 		day cycle or hour cycle or half-hour cycle, the app should ask
+		"Okay, so what did you get done in this macro?"
+		And the user can type a short message that will be displayed on
+ 		the next cycle in some sort of "Here's where you left off"
+		fashion.  A short message will do, like "Finished the Methods
+		section in the lab report."
+		
+		Each record instance should be counted as "progress", or a 
+		finished task.  
+		
+		There also should be a recording option to say "I feel finished
+		with this macro."  At such a point, the macro would be taken off
+		the priority tree and marked as completed.  
+
+		If a deadline was specified and the date is nigh, the macro 	
+                should also be taken off the priority tree, but there should be
+ 		a  prompt that asks "On a scale of 0% to 100%, how complete does
+		the macro seem to you?" Which will determine if the macro is filed
+		as completed or not, or maybe even semi-completed.		
+
+	Feel Good 
+		This feature should display the acheivements of the week.
+		"Here's what you got done.  Feel good about yourself."
+		It should display the number of macros completed and the names
+		of the macros themselves.
+		It should also be able to display a summary of the individual tasks
+		completed in the same timespan.
+		We should be able to organize these by time completed or by macro or 
+		by time it took to complete task, etc., etc.
+
+		Perhaps it would also be good to be able to have a record summary at
+		the end of the day.
+	
+	Behavior Analysis
+		The app should be able to help and adjust the user's habits.
+		Let's say it detects a lot of unfinished tasks/empty records.
+		It should remind the user of upcoming deadlines and make it harder
+		to ignore and impossible to reproritize the designated macros.
+
+		Or, let's say it detects a lot of records in a span of time.
+		A lot of recorded tasks or completed macros could indicate 
+		"crunch mode" or plain "workaholic" behavior.  The app should 
+		encourage a break, by suggesting making fun plans for the weekend
+		or taking a nap.		
+
+		It could also impose a stricter regime and immovable priority
+		if it notices a lot of recorded tasks in a low-priority macro,
+		e.g. working on a side project instead of focusing on a fast 
+		approaching deadline. 
+------------------------------------------------------------------------------------
+Visuals
+	Colored bubbles of text to display the macros and the latest record message
+	seem appropriate.  The color could denote priority/completedness, and could
+	be made as nodes on a visual priority tree.
+------------------------------------------------------------------------------------
+Platform
+	It would be really convenient if this could be a Google App that could be 
+	run on Android and iOS as well as in Chrome.
