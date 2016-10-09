@@ -123,8 +123,8 @@ function Magro(name,deadline,startDate,importance)
 
 
 }
-
-
+//TEST CODE//
+/*
 var now = new Date();
 var deadline = new Date();
 deadline.setHours(now.getHours()+1);
@@ -135,7 +135,7 @@ sampleMagro.doTask("From");
 sampleMagro.doTask("The Bottom");
 
 console.log(sampleMagro.getTaskList());
-
+*/
 
 
 
