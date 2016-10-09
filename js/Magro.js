@@ -1,18 +1,18 @@
 /*
- * Magro implementation - Hackathon Project HackNY fall 2016
+  Magro implementation - Hackathon Project HackNY fall 2016
  *
  * Magro.js is responsible for:
  * -managing incoming macro-task data
  * -making data readable and accessible
  * -linking the macro-tasks together by rank of priority
  */
-function Magro(name,deadline,startDate,importance)
+var Magro = function(name,deadline,startDate,priority)
 {
   //pertinent information about our magro
   this.name = name;//string
   this.deadline = deadline;//Date object
   this.startDate = startDate;//Date object
-  this.importance = importance;//string
+  this.priority = priority;//number
   //rank from 1 to 10
   //1 is the highest 
   this.finished = false;
@@ -40,9 +40,9 @@ function Magro(name,deadline,startDate,importance)
   }
   //This will eventually cause a reordering or rebalance, idk how I want to do that yet. 
   //Am I going to create a tree object or a queue object?  
-  this.setImportance = function(importance)
+  this.setPriority = function(priority)
   {
-    this.importance = importance;
+    this.priority = priority;
   }
 
   this.getName = function()
@@ -55,9 +55,9 @@ function Magro(name,deadline,startDate,importance)
     return this.deadline.toString();
   }
 
-  this.getImportance = function()
+  this.getpriority = function()
   {
-    return this.importance; //don't need string
+    return this.priority; //don't need string
   }
 
   this.getStartDate = function()
@@ -111,26 +111,6 @@ function Magro(name,deadline,startDate,importance)
     return "Task added!";
   }
 
-  //DLL shit
-  this.link = function(otherMagro)
-  {
-    var otherImportance = otherMagro.getImportance();
-    if(otherImportance != this.importance)
-    {
-      console.log("reorder");
-      if(otherImportance > this.importance)
-      {
-        this.upper = otherMagro;
-      }
-      else this.lower = otherMagro;
-    }
-    else 
-    {
-      console.log("the same");
-      this.alongside = otherMagro;
-    }
-  }
-
   //finishing a task
   this.finishMagro = function()
   {
@@ -144,11 +124,38 @@ function Magro(name,deadline,startDate,importance)
   }
   
 
+this.hasAlongside = function()
+{
+  return currentMagro.alongside != null;
+}
 
   
 
 
 }
+
+Magro.compare = function(Magro1, Magro2)
+{
+  priority1 = Magro1.getpriority();
+  priority2 = Magro2.getpriority();
+
+  if(priority1 === priority2)
+  {
+    return 0;//1st and 2nd Magros have equal priority
+  }
+
+  else if(priority1 > priority2)
+  {
+    return 1;//2nd Magro is lower on the hierarchy (higher priority)
+  }
+  else
+  {
+    return -1; //1st Magro is lower on the hierarchy (higher priority)
+  }
+}
+
+
+
 //TEST CODE//
 
 var now = new Date();
@@ -165,8 +172,9 @@ sampleMagro.doTask("The Bottom");
 
 console.log(sampleMagro.getTaskList());
 
-sampleMagro.link(sampleMagro2);
-console.log(sampleMagro.alongside.getDeadline());
+
+
+
 
 
 
