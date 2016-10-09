@@ -23,7 +23,8 @@
 				<li><input id="description" type="text" placeholder="Description"/></li>
 				<li><input id="date" type="text" placeholder="2017/12/2"/></li>
 				<li><input id="priority" type="text" placeholder="4"/></li>
-	<li><input id="create-task" type="button" onclick="addToSession(document.getElementById('taskName').value, new Date('2015-05-25'),4 )" value="create"/></li>
+	<li><input id="create-task" type="button" onclick="addToSession(document.getElementById('taskName').value, new Date('2015-05-25'),
+    parseInt(document.getElementById('priority').value))" value="create"/></li>
 			</ul>
 
 		</div>
