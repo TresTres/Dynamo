@@ -21,28 +21,14 @@
 			<ul>
 				<li><input id="taskName" type="text" placeholder="Database HW"></input></li>
 				<li><input id="description" type="text" placeholder="Description"/></li>
-				<li><input id="date" type="text" placeholder="2017/12/2"/></li>
+				<li><input id="dateInt" type="text" placeholder="2017/12/2"/></li>
 				<li><input id="priority" type="text" placeholder="4"/></li>
 	<li><input id="create-task" type="button" onclick="addToSession(document.getElementById('taskName').value, new Date('2015-05-25'),
-    parseInt(document.getElementById('priority').value))" value="create"/></li>
+    parseInt(document.getElementById('priority').value), document.getElementById('description').value)" value="create"/></li>
 			</ul>
-
 		</div>
 		
-		<div id="tasks"class="events-list-container">			
-			<!--Example UI-->
-			<!--<div class="event-container">
-				<div class="date-container">
-					<h2 class="date">18th</h2>
-					<h2 class="month">oct</h2>
-				</div>
-				<h1 class="title">Database HW</h1>
-				<p class="description">fuck database</p>
-			</div>-->
-		</div>
-
-
-
+		<div id="tasks"class="events-list-container"></div>
 
 	</body>
 </html>

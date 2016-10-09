@@ -13,10 +13,11 @@ var DynamoSession = function()
   this.tail = null; //lowest (highest in priority)
   
   this.add = function (otherName, otherDeadline,
-                       otherStartDate, otherpriority)
+                       otherStartDate, otherpriority,
+					   description)
   {
       newMagro = new Magro(otherName, otherDeadline,
-                           otherStartDate, otherpriority);
+                           otherStartDate, otherpriority, description);
       currentMagro = this.head;
       
       //empty
@@ -227,10 +228,10 @@ var DynamoSession = function()
 
 var myDynamoSession = new DynamoSession();
 
-function addToSession(taskName, deadline, priorityNum){
+function addToSession(taskName, deadline, priorityNum, description){
 	var now = new Date();
 	
-	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum);
+	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum, description);
   //itr is at the head??
   if(itr = myDynamoSession.head)
   {
@@ -251,7 +252,7 @@ function addToSession(taskName, deadline, priorityNum){
 							"<h2 class=\"month\">"+itr.deadline.getMonth()+"</h2>"+
 						"</div>"+
 						"<h1 class=\"title\">"+itr.name+"</h1>"+
-						"<p class=\"description\">test</p>"+
+						"<p class=\"description\">"+itr.description+"</p>"+
 					"</div>"
 
     itr = itr.lower;

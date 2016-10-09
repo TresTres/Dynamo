@@ -6,13 +6,14 @@
  * -making data readable and accessible
  * -linking the macro-tasks together by rank of priority
  */
-var Magro = function(name,deadline,startDate,priority)
+var Magro = function(name,deadline,startDate,priority, description)
 {
   //pertinent information about our magro
   this.name = name;//string
   this.deadline = deadline;//Date object
   this.startDate = startDate;//Date object
   this.priority = priority;//number
+  this.description = description; //Ez do helper functions for this later
   //rank from 1 to 10
   //1 is the highest 
   this.finished = false;
