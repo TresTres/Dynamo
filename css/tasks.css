@@ -1,0 +1,41 @@
+.events-list-container{
+	left: 50%;
+	top: 0;
+	position: absolute;
+	background-color: #005cff;
+	width: 50%;
+	height: 100%;
+}
+
+.new-task-container{
+	left: 0;
+	top: 30%;
+	width: 50%;
+	height: 70%;
+	position: absolute;
+	background-color:#00b8ff; 
+}
+
+.new-task-container .header{
+	font-family: "Arial", serif;
+	font-size: 50px;
+	color:white;
+	text-align: center;
+}
+
+.new-task-container .list-title{
+	
+}
+
+.new-task-container ul{
+	list-style-type: none;		
+	display:block;
+	margin: auto;
+
+}
+
+.new-task-container li{
+	display:block;
+	margin: 0 auto;
+	margin-bottom: 4%;
+}
