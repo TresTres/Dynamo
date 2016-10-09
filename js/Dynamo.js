@@ -231,6 +231,11 @@ function addToSession(taskName, deadline, priorityNum){
 	var now = new Date();
 	
 	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum);
+  //itr is at the head??
+  if(itr = myDynamoSession.head)
+  {
+    console.log("At head");
+  }
 	
 
 		
@@ -239,6 +244,7 @@ function addToSession(taskName, deadline, priorityNum){
 
 	for(var i=0; i<myDynamoSession._size; i++)
 	{
+    console.log("hi");
 		newAgenda+="<div class=\"event-container\">"+
 						"<div class=\"date-container\""+
 							"<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
@@ -247,6 +253,8 @@ function addToSession(taskName, deadline, priorityNum){
 						"<h1 class=\"title\">"+itr.name+"</h1>"+
 						"<p class=\"description\">test</p>"+
 					"</div>"
+
+    itr = itr.lower;
 	}
 	
 	document.getElementById("tasks").innerHTML=newAgenda;
