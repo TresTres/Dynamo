@@ -1,5 +1,5 @@
 /*
- * Magro implementation - Hackathon Project HackNY fall 2016
+  Magro implementation - Hackathon Project HackNY fall 2016
  *
  * Magro.js is responsible for:
  * -managing incoming macro-task data
@@ -111,26 +111,6 @@ function Magro(name,deadline,startDate,importance)
     return "Task added!";
   }
 
-  //DLL shit
-  this.link = function(otherMagro)
-  {
-    var otherImportance = otherMagro.getImportance();
-    if(otherImportance != this.importance)
-    {
-      console.log("reorder");
-      if(otherImportance > this.importance)
-      {
-        this.upper = otherMagro;
-      }
-      else this.lower = otherMagro;
-    }
-    else 
-    {
-      console.log("the same");
-      this.alongside = otherMagro;
-    }
-  }
-
   //finishing a task
   this.finishMagro = function()
   {
@@ -166,7 +146,8 @@ sampleMagro.doTask("The Bottom");
 console.log(sampleMagro.getTaskList());
 
 sampleMagro.link(sampleMagro2);
-console.log(sampleMagro.alongside.getDeadline());
+var alongside = sampleMagro.alongside;
+console.log(alongside.getTaskList());
 
 
 
