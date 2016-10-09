@@ -29,9 +29,10 @@
 
 .new-task-container ul{
 	list-style-type: none;		
+	list-style-position: inside;
+	text-align:center;
 	display:block;
 	margin: auto;
-
 }
 
 .new-task-container li{

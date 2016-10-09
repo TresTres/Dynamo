@@ -225,19 +225,32 @@ var DynamoSession = function()
 
 }
 
-var now = new Date();
-var deadline = new Date();
-
-deadline.setHours(now.getHours()+1);
-
-
 var myDynamoSession = new DynamoSession();
 
+function addToSession(taskName, deadline, priorityNum){
+	var now = new Date();
+	
+	var magro = new Magro(taskName, deadline, now, priorityNum);
+	myDynamoSession.add(magro);
 
-for (var i = 0; i < 10; i++)
-{
+	var itr = myDynamoSession.head;	
+	
+	var newAgenda="";
 
-  myDynamoSession.add("Swag", deadline, now, Math.floor(Math.random()*10));
+	for(var i=0; i<myDynamoSession._size; i++)
+	{
+		newAgenda+="<div class=\"event-container\">"+
+						"<div class=\"date-container\""+
+							"<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
+							"<h2 class=\"month\">"+itr.deadLine.getMonth()+"</h2>"+
+						"</div>"+
+						"<h1 class=\"title\">"+itr.name+"</h1>"+
+						"<p class=\"description\">test</p>"+
+					"</div>"
+	}
+	
+	document.getElementByClassName("events-list-container").innerHTML=newAgenda;
+	
 }
 
 

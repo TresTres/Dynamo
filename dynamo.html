@@ -19,12 +19,18 @@
 		<div class="new-task-container">
 			<h1 class="header">New Task</h1>
 			<ul>
-				<li><h4 class="list-title">Task</h4><input type="text" placeholder="Database Homework"></input></li>
-				<li><input type="text" placeholder="Description"></input></li>
-				<li><input type="text" placeholder="12/12/2019"></li>
+				<li><h4 class="list-title" >Task</h4><input id="taskName" type="text" placeholder="Database HW"></input></li>
+				<li><input id="description"type="text" placeholder="Description"/></li>
+				<li><input id="date" type="text" placeholder="2017/12/2"/></li>
+				<li><input id="priority" type="text" placehilder="4"/></li>
+				<li><input id="create-task" onclick="addToSession(document.getElementById('taskname').value,
+																  new Date(document.getElementById('date').value),
+																  4)"
+						type="button" value="create"></li>
 			</ul>
-		</div>
 
+		</div>
+		
 		<div class="events-list-container">			
 			<!--Example UI-->
 			<div class="event-container">
@@ -35,28 +41,8 @@
 				<h1 class="title">Database HW</h1>
 				<p class="description">fuck database</p>
 			</div>
-
-			<div class="event-container">
-				<div class="date-container">
-					<h2 class="date">20th</h2>
-					<h2 class="month">oct</h2>
-				</div>
-				<h1 class="title">Discrete II HW</h1>
-				<p class="description">Study and do Assignment 3</p>
-			</div>
-		
-			<div class="event-container">
-				<div class="date-container">
-					<h2 class="date">23th</h2>
-					<h2 class="month">oct</h2>
-				</div>
-				<h1 class="title">Study for Algorithms Exam</h1>
-				<p class="description">fuck database</p>
-			</div>
-
 		</div>
 
-		
 
 
 
