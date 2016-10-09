@@ -232,15 +232,12 @@ function addToSession(taskName, deadline, priorityNum, description){
 	var now = new Date();
 	
 	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum, description);
-  //itr is at the head??
-  if(itr = myDynamoSession.head)
-  {
-    console.log("At head");
-  }
-	
-
-		
-	
+  	
+	//itr is at the head??
+  	if(itr = myDynamoSession.head)
+  	{
+    	console.log("At head");
+  	}	
 	var newAgenda="";
 
 	for(var i=0; i<myDynamoSession._size; i++)
@@ -249,7 +246,7 @@ function addToSession(taskName, deadline, priorityNum, description){
 		newAgenda+="<div class=\"event-container\">"+
 						"<div class=\"date-container\""+
 							"<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
-							"<h2 class=\"month\">"+itr.deadline.getMonth()+"</h2>"+
+							"<h2 class=\"month\">"+getMonth(itr.deadline.getMonth())+"</h2>"+
 						"</div>"+
 						"<h1 class=\"title\">"+itr.name+"</h1>"+
 						"<p class=\"description\">"+itr.description+"</p>"+
@@ -260,6 +257,73 @@ function addToSession(taskName, deadline, priorityNum, description){
 	
 	document.getElementById("tasks").innerHTML=newAgenda;
 	
+}
+
+function getMonth(monthNum)
+{
+	switch(monthNum)
+	{
+		case 0:
+		{
+			return "JAN"
+			break;
+		}
+		case 1:
+		{
+			return "FEB"
+			break;
+		}
+		case 2:
+		{
+			return "MAR"
+			break;
+		}
+		case 3:
+		{
+			return "APR"
+			break;
+		}
+		case 4:
+		{
+			return "MAY"
+			break;
+		}
+		case 5:
+		{
+			return "JUN"
+			break;
+		}
+		case 6:
+		{
+			return "JUL"
+			break;
+		}
+		case 7:
+		{
+			return "AUG"
+			break;
+		}
+		case 8:
+		{
+			return "SEP"
+			break;
+		}
+		case 9:
+		{
+			return "OCT"
+			break;
+		}
+		case 10:
+		{
+			return "NOV"
+			break;
+		}
+		case 11:
+		{
+			return "DEC"
+			break;
+		}
+	}
 }
 
 
