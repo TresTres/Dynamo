@@ -1,0 +1,16 @@
+.time-container{
+	width: 50%;
+	height: 30%;
+	background-color:#0083ff;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+#clock{
+	text-align: center;
+	font-size: 100px;
+	color: white;
+	font-family: "Arial", serif;
+
+}

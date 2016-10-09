@@ -1,24 +1,63 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="css/event.css">
-		<link rel="stylesheet" href="css/landing.css"></link>
+		<link rel="stylesheet" href="css/event.css"/>
+		<link rel="stylesheet" href="css/landing.css"/>
+		<link rel="stylesheet" href="css/time.css"/>
+		<link rel="stylesheet" href="css/tasks.css"/>
 		<script src="js/clock.js"></script>
 	</head>
 		
 	<body onload = "startTime('clock')">
 			
+		<div class="time-container">
+			<h1 id="clock"></h1>
+		</div>
+		
+		<div class="new-task-container">
+			<h1 class="header">New Task</h1>
 
-		<!--Example UI-->
-		<div class="event-container">
-			<h1 class="title">Database HW</h1>
-			<p class="description">fuck database</p>
+
+			<ul>
+				<li><h4 class="list-title">Task</h4><input type="text" placeholder="Database Homework"></input></li>
+				<li><input type="text" placeholder="Description"></input></li>
+				<li><input type="text" placeholder="12/12/2019"></li>
+			</ul>
 		</div>
 
-		<div class="event-container">
-			<h1 class="title">Discrete II HW</h1>
-			<p class="description">Study and do Assignment 3</p>
+		<div class="events-list-container">			
+			<!--Example UI-->
+			<div class="event-container">
+				<div class="date-container">
+					<h2 class="date">18th</h2>
+					<h2 class="month">oct</h2>
+				</div>
+				<h1 class="title">Database HW</h1>
+				<p class="description">fuck database</p>
+			</div>
+
+			<div class="event-container">
+				<div class="date-container">
+					<h2 class="date">20th</h2>
+					<h2 class="month">oct</h2>
+				</div>
+				<h1 class="title">Discrete II HW</h1>
+				<p class="description">Study and do Assignment 3</p>
+			</div>
+		
+			<div class="event-container">
+				<div class="date-container">
+					<h2 class="date">23th</h2>
+					<h2 class="month">oct</h2>
+				</div>
+				<h1 class="title">Study for Algorithms Exam</h1>
+				<p class="description">fuck database</p>
+			</div>
+
 		</div>
 
-		<h1 id="clock"></h1>
+		
+
+
+
 	</body>
 </html>

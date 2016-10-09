@@ -1,34 +1,46 @@
-.event-container{
-	
-	width: 40%;
-	display:block;
+.event-container{	
+	width: 80%;
 	margin: auto;	
 	
 	color: white;
-	font-family: "Times New Roman", serif;
-	
-	border-radius: 15px;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	font-size: 15px;
+
 	border-style: solid;
 	border-color: white;
 	
 	margin-bottom: 3%;
+	line-height: 0px;
+	z-index: 10;
 }
 
-.event.date{
+.event-container .date-container{
+	display: inline-block;	
+	margin-bottom: 0%;
+	margin-left: 3%;
+	margin-right: 3%;
+	line-height: 0px;
 	
 }
 
-.event-container.title{
-	display: inline-block;
+.event-container .date-container .date{
+	margin-bottom: 0%;
 	font-size: 15px;
-	float: left;
 }
 
-.event-container.description{	
-	font-size: 10px;
-	display:inline-block;
+.event-container .date-container .month{
+	font-size: 25px;
 }
 
-.event-container.progress-percent{
+.event-container .title{
+	display: inline-block;
+	line-height:0px;
+}
+
+.event-container .description{	
+	margin-left: 3%;
+}
+
+.event-container .progress-percent{
 	
 }
