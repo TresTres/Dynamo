@@ -6,7 +6,7 @@
  * -making data readable and accessible
  * -linking the macro-tasks together by rank of priority
  */
-function Magro(name,deadline,startDate,priority)
+var Magro = function(name,deadline,startDate,priority)
 {
   //pertinent information about our magro
   this.name = name;//string
@@ -40,7 +40,7 @@ function Magro(name,deadline,startDate,priority)
   }
   //This will eventually cause a reordering or rebalance, idk how I want to do that yet. 
   //Am I going to create a tree object or a queue object?  
-  this.setpriority = function(priority)
+  this.setPriority = function(priority)
   {
     this.priority = priority;
   }
@@ -124,7 +124,7 @@ function Magro(name,deadline,startDate,priority)
   }
   
 
-this.hasAlongside = function(currentMagro)
+this.hasAlongside = function()
 {
   return currentMagro.alongside != null;
 }

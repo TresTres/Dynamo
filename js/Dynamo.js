@@ -5,7 +5,7 @@
  * -managing the tree?
  */
 
-function DynamoSession()
+var DynamoSession = function()
 {
 
   this._size = 0;
@@ -15,7 +15,7 @@ function DynamoSession()
   this.add = function (otherName, otherDeadline,
                        otherStartDate, otherpriority)
   {
-      var newMagro = Magro(otherName, otherDeadline,
+      newMagro = new Magro(otherName, otherDeadline,
                            otherStartDate, otherpriority);
       currentMagro = this.head;
       
@@ -31,7 +31,7 @@ function DynamoSession()
       //not empty
       else
       {   
-        while(currentMagro != tail) //go down the list
+        while(currentMagro != null) //go down the list
        {
           switch(Magro.compare(currentMagro, newMagro))
               {
@@ -65,7 +65,7 @@ function DynamoSession()
                   //already sorted in descending order, attach higher
                   upper = currentMagro.upper; //previous
                   newMagro.lower = currentMagro; //attach the bottom
-                  newmagro.upper = upper; //attach the top
+                  newMagro.upper = upper; //attach the top
                   currentMagro.upper = newMagro; //reciprocrate from bottom
                   if(upper == null) //adding head
                   {
@@ -85,9 +85,10 @@ function DynamoSession()
               }
         }
         //hit end of the hierarchy
-        //currentMagro.lower = null
+        console.log("Hit end of hierarchy");
+        currentMagro = this.tail;
         newMagro.upper = currentMagro;
-        newMagro.lower = currentMagro.lower;
+        newMagro.lower = null;
         currentMagro.lower = newMagro;
         tail = newMagro;
         this._size++;
@@ -138,13 +139,13 @@ function DynamoSession()
       
       if(upper == null && lower == null)
       {
-        //head and tail
+        //one level
         if(pointOfInterest.hasAlongside())
         {
           //move the head and tail to the sibling
           alongside = pointOfInterest.Alongside();
           this.head  = alongside;
-          this.tail = alongside;
+          this.tail = lower;
           this._size--;
           console.log("Magro removed");
           return this.head;
@@ -224,11 +225,20 @@ function DynamoSession()
 
 }
 
+var now = new Date();
+var deadline = new Date();
+
+deadline.setHours(now.getHours()+1);
 
 
+var myDynamoSession = new DynamoSession();
 
 
+for (var i = 0; i < 10; i++)
+{
 
+  myDynamoSession.add("Swag", deadline, now, Math.floor(Math.random()*10));
+}
 
 
 
