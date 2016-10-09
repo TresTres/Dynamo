@@ -124,6 +124,10 @@ function Magro(name,deadline,startDate,priority)
   }
   
 
+this.hasAlongside = function(currentMagro)
+{
+  return currentMagro.alongside != null;
+}
 
   
 
