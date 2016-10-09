@@ -9,6 +9,7 @@ body{
 	font-size: 100px;
 	color: white;
 	font-family: "Arial", serif;
-	padding-top: 30%;
+	display: static;
+
 }
 
