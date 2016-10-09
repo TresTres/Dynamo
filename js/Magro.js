@@ -157,7 +157,7 @@ Magro.compare = function(Magro1, Magro2)
 
 
 //TEST CODE//
-
+/*
 var now = new Date();
 var deadline = new Date();
 
@@ -172,7 +172,7 @@ sampleMagro.doTask("The Bottom");
 
 console.log(sampleMagro.getTaskList());
 
-
+*/
 
 
 

@@ -26,7 +26,7 @@ var DynamoSession = function()
         this.tail = newMagro; 
         this._size++;
         console.log("Added first Magro");
-        return newMagro;
+        return this.head;
       }
       //not empty
       else
@@ -50,7 +50,7 @@ var DynamoSession = function()
                     //non reciprocated by upper and lower
                     currentMagro.alongside = newMagro;
                     this._size++;
-                    return newMagro;
+                    return this.head;
                   }
                   else
                   {
@@ -72,12 +72,12 @@ var DynamoSession = function()
                     this.head = newMagro;
                     this._size++;
                     console.log("Added a new head");
-                    return newMagro;
+                    return this.head;
                   }
                   upper.lower = newMagro; //reciprocate from top
                   console.log("Added a new Magro");
                   this._size++;
-                  return newMagro;
+                  return this.head;
                   break;
                 default:
                   console.log("Error: what the heck did you do?");
@@ -93,7 +93,7 @@ var DynamoSession = function()
         tail = newMagro;
         this._size++;
         console.log("Added a new tail");
-        return newMagro;
+        return this.head;
       }            
   }
   
@@ -230,10 +230,10 @@ var myDynamoSession = new DynamoSession();
 function addToSession(taskName, deadline, priorityNum){
 	var now = new Date();
 	
-	var magro = new Magro(taskName, deadline, now, priorityNum);
-	myDynamoSession.add(magro);
+	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum);
+	
 
-	var itr = myDynamoSession.head;	
+		
 	
 	var newAgenda="";
 
@@ -242,14 +242,14 @@ function addToSession(taskName, deadline, priorityNum){
 		newAgenda+="<div class=\"event-container\">"+
 						"<div class=\"date-container\""+
 							"<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
-							"<h2 class=\"month\">"+itr.deadLine.getMonth()+"</h2>"+
+							"<h2 class=\"month\">"+itr.deadline.getMonth()+"</h2>"+
 						"</div>"+
 						"<h1 class=\"title\">"+itr.name+"</h1>"+
 						"<p class=\"description\">test</p>"+
 					"</div>"
 	}
 	
-	document.getElementByClassName("events-list-container").innerHTML=newAgenda;
+	document.getElementById("tasks").innerHTML=newAgenda;
 	
 }
 
