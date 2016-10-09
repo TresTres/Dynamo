@@ -1,3 +1,13 @@
-#clock{
-	text-align:center;
+body{
+	background: url("../img/back_1.jpg") fixed;
+	background-size: 100%;
 }
+
+#clock{
+	text-align: center;
+	font-size: 100px;
+	color: #3f3f3f;
+	font-family: "Arial", serif;
+	padding-top: 30%;
+}
+

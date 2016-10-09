@@ -1,0 +1,28 @@
+.event-container{
+	left: 20%;
+	width: 30%;
+	
+	color: white;
+	font-family: "Times New Roman", serif;
+	
+	border-radius: 15px;
+	border-style: solid;
+	border-color: white;
+	
+	display:inline-block;
+}
+
+.event-container.title{
+	display: inline-block;
+	font-size: 15px;
+	float: left;
+}
+
+.event-container.description{	
+	font-size: 10px;
+	display:inline-block;
+}
+
+.event-container.progress-percent{
+	
+}
