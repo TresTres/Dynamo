@@ -9,97 +9,108 @@
 var Magro = function(name,deadline,startDate,priority, description)
 {
   //pertinent information about our magro
-  this.name = name;//string
-  this.deadline = deadline;//Date object
-  this.startDate = startDate;//Date object
-  this.priority = priority;//number
-  this.description = description; //Ez do helper functions for this later
-  //rank from 1 to 10
-  //1 is the highest 
-  this.finished = false;
-  this.numTasks = 0;
+  var name = name;//string
+  var deadline = deadline;//Date object
+  var startDate = startDate;//Date object
+  var priority = priority;//number from 1 to 10, but the range can be more
+  var description = description; //string
+   
+  var finished = false; //new macro-tasks are not done
+   
   
   //relate this magro to other magros
-  this.upper = null;
-  this.lower = null;
-  this.alongside = null;
+  var upper = null;
+  var lower = null;
+  
   //each magro will have a list of task completions 
   //(think of git commit log)
   
   //start with empty tasklist
-  this.taskList = [];
+  var taskList = [];
+  var numTasks = 0; 
 
   //helper functions
-  this.setName = function(name)
+  this.setName = function(n)
   {
-    this.name = name;
+    name = n;
   }
   
-  this.setDeadline = function(deadline)
+  this.setDeadline = function(d)
   {
-    this.deadline = deadline;
+    deadline = d;
   }
-  //This will eventually cause a reordering or rebalance, idk how I want to do that yet. 
-  //Am I going to create a tree object or a queue object?  
-  this.setPriority = function(priority)
+  
+  this.setPriority = function(p)
   {
-    this.priority = priority;
+    priority = p;
+    //run a reorder check in the DynamoSession class
+  }
+  
+  this.setDescription = function(descrip)
+  {
+    description = descrip;
   }
 
   this.getName = function()
   {
-    return this.name.toString();
+    return name.toString();
   }
 
   this.getDeadline = function()
   {
-    return this.deadline.toString();
+    return deadline.toString();
   }
-
+//////////All hail the mighty key/////////////
   this.getpriority = function()
   {
-    return this.priority; //don't need string
+    return priority; //don't need string
   }
-
+//////////////////////////////////////////////
   this.getStartDate = function()
   {
-    return this.startDate.toString();
+    return startDate.toString();
   }
 
   this.getNumTasks = function()
   {
-    return this.taskList.length;
+    return taskList.length;
+  }
+
+  this.getDescription = function()
+  {
+    return description;
   }
 
   //getTaskList returns an array of strings
   this.getTaskList = function()
   {
-    if(this.taskList.length == 0)
+    if(taskList.length == 0)
     {
       return "No tasks written.";
     }
 
     var taskStrings = "";
-    for (var i = 0; i < this.taskList.length; i++)
+    for (var i = 0; i < taskList.length; i++)
     {
-      for(var field in this.taskList[i])
+      for(var field in taskList[i])
       {
-        taskStrings += this.taskList[i][field] + " : ";
+        taskStrings += field + ": " + taskList[i][field] + "\n";
       }
-      taskStrings += "\n";
+     taskStrings += "-----------------------------------------\n"; 
     }
     return taskStrings;
   }
 
-
+///////////////////////////////////////DO SOME SHIT
 
   //let's add a task
   this.doTask = function(message)
   {
     var task = {}
-
-    task['number'] = this.numTasks+1; //start counting at one
-    this.numTasks++;
+    
+    numTasks++;
+    task['number'] = numTasks; //start counting at one
+    
 
     task['message'] = message;    
     
@@ -107,58 +118,53 @@ var Magro = function(name,deadline,startDate,priority, description)
     var now = new Date();
     task['commitTime'] = now.toString();
     
-    this.taskList.push(task);
-   
+    taskList.push(task);
     return "Task added!";
   }
 
-  //finishing a task
-  this.finishMagro = function()
+
+  //finishing the Magro
+  this.finish = function()
   {
-    if(this.numTasks === 0)
+    if(numTasks === 0)
     {
-      this.finished = false;
+      finished = false;
       return "You haven't completed any tasks toward finishing this.\nIf you don't want to do this task/made it on mistake, delete it instead.";
     }
-    this.finished = true;
+    finished = true;
     return "You're all done!";
+    
+    //record the completion in the DynamoSession class
   }
-  
 
-this.hasAlongside = function()
-{
-  return currentMagro.alongside != null;
-}
-
-  
-
-
-}
-
-Magro.compare = function(Magro1, Magro2)
-{
-  priority1 = Magro1.getpriority();
-  priority2 = Magro2.getpriority();
-
-  if(priority1 === priority2)
+  //comparision function - static-ish??
+  compare = function(Magro1, Magro2)
   {
-    return 0;//1st and 2nd Magros have equal priority
+    priority1 = Magro1.getpriority();
+    priority2 = Magro2.getpriority();
+
+    if(priority1 === priority2)
+    {
+      return 0;//1st and 2nd Magros have equal priority
+    }
+
+    else if(priority1 > priority2)
+    {
+      return 1;//2nd Magro is lower on the hierarchy (higher priority)
+    }
+    else
+    {
+      return -1; //1st Magro is lower on the hierarchy (higher priority)
+    }
   }
 
-  else if(priority1 > priority2)
-  {
-    return 1;//2nd Magro is lower on the hierarchy (higher priority)
-  }
-  else
-  {
-    return -1; //1st Magro is lower on the hierarchy (higher priority)
-  }
+//end of class definition
 }
 
 
 
 //TEST CODE//
-/*
+
 var now = new Date();
 var deadline = new Date();
 
@@ -173,7 +179,7 @@ sampleMagro.doTask("The Bottom");
 
 console.log(sampleMagro.getTaskList());
 
-*/
+
 
 
 
