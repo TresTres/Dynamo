@@ -7,7 +7,7 @@
  * -making data readable and accessible
  * -implement a heap for this 
  */
-var Magro = function(name,deadline,startDate,priority, description)
+var Magro = function(name, deadline, startDate, priority, description)
 {
   //pertinent information about our magro
   var name = name;//string
@@ -145,11 +145,11 @@ var Magro = function(name,deadline,startDate,priority, description)
 
     else if(priority1 > priority2)
     {
-      return 1;//2nd Magro is lower on the hierarchy (higher priority)
+      return 1;//2nd Magro has lower priority value
     }
     else
     {
-      return -1; //1st Magro is lower on the hierarchy (higher priority)
+      return -1; //1st Magro has lower priority value
     }
   }
 

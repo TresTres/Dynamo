@@ -12,6 +12,11 @@ var DynamoSession = function()
   this.heap = [null]; //"empty", but we reserve position 0
 }
 
+DynamoSession.prototype.add = function(name, deadline, startDate, priority, description)
+{
+  newMagro = new Magro(name, deadline, startDate, priority, description);
+  this.push(newMagro);
+}
 
 DynamoSession.prototype.push = function(newMagro)
 {
@@ -20,15 +25,15 @@ DynamoSession.prototype.push = function(newMagro)
  this.filterUp(heap.length - 1); 
 }
 
-DynamoSession.prototye.filterUp = function(magroID)
+DynamoSession.prototype.filterUp = function(magroID)
 {
   while(magroID/2 > 0)//don't touch array position 0
   {
     var flag = Magro.compare(this.heap[magroID], this.heap[magroID/2]);
     /*Magro.compare(child, parent)
      *0 -> child and parent same priority
-     *1 -> parent has higher priority than child **Desired
-     *-1-> child has higher priority than parent
+     *1 -> parent has lower priority than child **Desired
+     *-1-> child has lower priority than parent
      */
     if(flag > -1)
     {
@@ -43,92 +48,39 @@ DynamoSession.prototye.filterUp = function(magroID)
   }
 }
 
-  this.add = function (otherName, otherDeadline,
-                       otherStartDate, otherpriority,
-					   description)
+DynamoSession.prototype.filterDown = function(magroID)
+{
+  while(2*magroID < this.heap.length)
   {
-      newMagro = new Magro(otherName, otherDeadline,
-                           otherStartDate, otherpriority, description);
-      currentMagro = this.head;
-      
-      //empty
-      if(currentMagro === null)
-      {
-        this.head = newMagro;
-        this.tail = newMagro; 
-        this._size++;
-        console.log("Added first Magro");
-        return this.head;
-      }
-      //not empty
-      else
-      {   
-        while(currentMagro != null) //go down the list
-       {
-          switch(Magro.compare(currentMagro, newMagro))
-              {
-                case -1:
-                  console.log("should insert lower");
-                  currentMagro = currentMagro.lower; //go lower
-                  break;
+    //look at the farthest position first
+    if(this.heap[2*magroID + 1] != null)
+    {
+      var childID = 2*magroID + 1;
+    }
+    else
+    {
+      var childID = 2*magroID;
+    }
 
-                case 0:
-                  console.log("equal priority");
-                  if(currentMagro.hasAlongside() == false)
-                  {
-                    newMagro.alongside = currentMagro; //add this at the same level
-                    newMagro.upper = currentMagro.upper;
-                    newMagro.lower = currentMagro.lower;
-                    //non reciprocated by upper and lower
-                    currentMagro.alongside = newMagro;
-                    this._size++;
-                    return this.head;
-                  }
-                  else
-                  {
-                    console.log("No more than 2 tasks can have same priority!");
-                    //quick fix
-                    newMagro.setPriority(newMagro.priority - 1);
-                    currentMagro = currentMagro.lower; //go lower
-                  }
-                  break;
-                case 1:
-                  console.log("should insert higher");
-                  //already sorted in descending order, attach higher
-                  upper = currentMagro.upper; //previous
-                  newMagro.lower = currentMagro; //attach the bottom
-                  newMagro.upper = upper; //attach the top
-                  currentMagro.upper = newMagro; //reciprocrate from bottom
-                  if(upper == null) //adding head
-                  {
-                    this.head = newMagro;
-                    this._size++;
-                    console.log("Added a new head");
-                    return this.head;
-                  }
-                  upper.lower = newMagro; //reciprocate from top
-                  console.log("Added a new Magro");
-                  this._size++;
-                  return this.head;
-                  break;
-                default:
-                  console.log("Error: what the heck did you do?");
-                  return null;
-              }
-        }
-        //hit end of the hierarchy
-        console.log("Hit end of hierarchy");
-        currentMagro = this.tail;
-        newMagro.upper = currentMagro;
-        newMagro.lower = null;
-        currentMagro.lower = newMagro;
-        tail = newMagro;
-        this._size++;
-        console.log("Added a new tail");
-        return this.head;
-      }            
+    var flag = Magro.compare(this.heap[magroID], this.heap[childID]);
+    /*Magro.compare(parent, child)
+     *0 -> parent and child same priority
+     *1 -> child has lower priority than parent
+     *-1-> parent has lower priority than child **Desired
+     */
+    if(flag < 1)
+    {
+      break;
+    }
+    //simple switch
+    temp = this.heap[childID];
+    this.heap[childID] = this.heap[magroID];
+    this.heap[magroID] = temp;
+
+    magroID = childID;
   }
-  
+}
+
   this.findByName = function(name)
   {
     currentMagro = this.head;
