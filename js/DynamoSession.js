@@ -81,7 +81,7 @@ DynamoSession.prototype.filterDown = function(magroID)
   }
 }
 
-  this.findByName = function(name)
+ this.findByName = function(name)
   {
     currentMagro = this.head;
     while(currentMagro != this.tail)
