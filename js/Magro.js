@@ -1,10 +1,11 @@
 /*
-  Magro implementation - Hackathon Project HackNY fall 2016
+
+ * Magro implementation - Hackathon Project HackNY fall 2016
  *
  * Magro.js is responsible for:
  * -managing incoming macro-task data
  * -making data readable and accessible
- * -linking the macro-tasks together by rank of priority
+ * -implement a heap for this 
  */
 var Magro = function(name,deadline,startDate,priority, description)
 {
@@ -12,19 +13,13 @@ var Magro = function(name,deadline,startDate,priority, description)
   var name = name;//string
   var deadline = deadline;//Date object
   var startDate = startDate;//Date object
-  var priority = priority;//number from 1 to 10, but the range can be more
+  var priority = priority;//number, dyanmo will be employing max-heap
   var description = description; //string
-   
+
   var finished = false; //new macro-tasks are not done
-   
-  
-  //relate this magro to other magros
-  var upper = null;
-  var lower = null;
-  
+
   //each magro will have a list of task completions 
   //(think of git commit log)
-  
   //start with empty tasklist
   var taskList = [];
   var numTasks = 0; 
@@ -34,21 +29,21 @@ var Magro = function(name,deadline,startDate,priority, description)
   {
     name = n;
   }
-  
+
   this.setDeadline = function(d)
   {
     deadline = d;
   }
-  
+
   this.setPriority = function(p)
   {
     priority = p;
     //run a reorder check in the DynamoSession class
   }
-  
-  this.setDescription = function(descrip)
+
+  this.setDescription = function(description)
   {
-    description = descrip;
+    description = description;
   }
 
   this.getName = function()
@@ -63,7 +58,7 @@ var Magro = function(name,deadline,startDate,priority, description)
 //////////All hail the mighty key/////////////
   this.getpriority = function()
   {
-    return priority; //don't need string
+    return priority; 
   }
 //////////////////////////////////////////////
   this.getStartDate = function()
@@ -107,17 +102,17 @@ var Magro = function(name,deadline,startDate,priority, description)
   this.doTask = function(message)
   {
     var task = {}
-    
+
     numTasks++;
     task['number'] = numTasks; //start counting at one
-    
 
-    task['message'] = message;    
-    
-    //when did we finish this task?
+
+    task['message'] = message;
+
+    //when did we add this task?
     var now = new Date();
     task['commitTime'] = now.toString();
-    
+
     taskList.push(task);
     return "Task added!";
   }
@@ -133,7 +128,7 @@ var Magro = function(name,deadline,startDate,priority, description)
     }
     finished = true;
     return "You're all done!";
-    
+
     //record the completion in the DynamoSession class
   }
 

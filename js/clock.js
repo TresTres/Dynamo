@@ -53,7 +53,7 @@ function displayDate(elementID){
 			break;
 		}
 		case 6:{
-			dayOfWeek = "Satday";
+			dayOfWeek = "Saturday";
 			break;
 		}
 	}

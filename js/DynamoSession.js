@@ -2,16 +2,47 @@
  * Hackathon Project HackNY Fall 2016
  * 
  * Dynamo.js is responsible for:
- * -managing the tree?
+ * The Priority Queue
  */
 
 var DynamoSession = function()
 {
 
-  this._size = 0;
-  this.head = null;//highest (lowest in priority)
-  this.tail = null; //lowest (highest in priority)
-  
+  this._size = 1;
+  this.heap = [null]; //"empty", but we reserve position 0
+}
+
+
+DynamoSession.prototype.push = function(newMagro)
+{
+ this.heap.push(newMagro);
+ this._size++;
+ this.filterUp(heap.length - 1); 
+}
+
+DynamoSession.prototye.filterUp = function(magroID)
+{
+  while(magroID/2 > 0)//don't touch array position 0
+  {
+    var flag = Magro.compare(this.heap[magroID], this.heap[magroID/2]);
+    /*Magro.compare(child, parent)
+     *0 -> child and parent same priority
+     *1 -> parent has higher priority than child **Desired
+     *-1-> child has higher priority than parent
+     */
+    if(flag > -1)
+    {
+      break;
+    }
+    //simple switch
+    temp = this.heap[magroID/2];
+    this.heap[magroID/2] = this.heap[magroID];
+    this.heap[magroID] = temp;
+
+    magroID = magroID/2;
+  }
+}
+
   this.add = function (otherName, otherDeadline,
                        otherStartDate, otherpriority,
 					   description)
