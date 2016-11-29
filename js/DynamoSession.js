@@ -12,17 +12,33 @@ var DynamoSession = function()
   this.heap = [null]; //"empty", but we reserve position 0
 }
 
-DynamoSession.prototype.add = function(name, deadline, startDate, priority, description)
+//adding a new Magro to the session
+DynamoSession.prototype.add = function(name, deadline, priority, description)
 {
+  startDate = new Date();
   newMagro = new Magro(name, deadline, startDate, priority, description);
   this.push(newMagro);
 }
 
+//add a new Magro to heap and sort
 DynamoSession.prototype.push = function(newMagro)
 {
  this.heap.push(newMagro);
  this._size++;
- this.filterUp(heap.length - 1); 
+ this.filterUp(heap.length - 1);
+}
+
+//remove the Magro with lowest priority value
+DynamoSession.prototype.pop = function()
+{
+  if(this._size < 2)
+  {
+    return "Cannot pop from an empty heap."
+  }
+  var targetMagro = this.heap[1];
+  this.heap[1] = this.heap.pop(heap.length - 1);
+  this.filterDown(1);
+  return targetMagro;
 }
 
 DynamoSession.prototype.filterUp = function(magroID)
@@ -100,37 +116,26 @@ DynamoSession.prototype.findByName = function(name)
 
 
 var myDynamoSession = new DynamoSession();
+var newAgenda = "";
 
-function addToSession(taskName, deadline, priorityNum, description){
-	var now = new Date();
-	
-	var itr = myDynamoSession.add(taskName, deadline, now, priorityNum, description);
-  	
-	//itr is at the head??
-  	if(itr = myDynamoSession.head)
-  	{
-    	console.log("At head");
-  	}	
-	var newAgenda="";
-
-	for(var i=0; i<myDynamoSession._size; i++)
-	{
-    console.log("hi");
-		newAgenda+="<div class=\"event-container\">"+
-						"<div class=\"date-container\""+
-							"<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
-							"<h2 class=\"month\">"+getMonth(itr.deadline.getMonth())+"</h2>"+
-						"</div>"+
-						"<h1 class=\"title\">"+itr.name+"</h1>"+
-						"<p class=\"description\">"+itr.description+"</p>"+
-					"</div>"
-
-    itr = itr.lower;
-	}
-	
-	document.getElementById("tasks").innerHTML=newAgenda;
-	
+for(var i=1; i < myDynamoSession._size - 1; i++)
+{
+  itr = myDynamoSession.heap[i];
+  console.log("hi we're at Magro#" + i);
+  newAgenda+=
+  "<div class=\"event-container\">"+
+  "<div class=\"date-container\""+
+  "<h2 class=\"date\">"+itr.deadline.getDate()+"th</h2>"+
+  "<h2 class=\"month\">"+getMonth(itr.deadline.getMonth())+"</h2>"+
+  "</div>"+
+  "<h1 class=\"title\">"+itr.name+"</h1>"+
+  "<p class=\"description\">"+itr.description+"</p>"+
+  "</div>"
 }
+
+document.getElementById("tasks").innerHTML=newAgenda;
+
+
 
 function getMonth(monthNum)
 {
