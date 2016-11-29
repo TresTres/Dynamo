@@ -81,133 +81,23 @@ DynamoSession.prototype.filterDown = function(magroID)
   }
 }
 
- this.findByName = function(name)
+DynamoSession.prototype.findByName = function(name)
+{
+  function checkName(name1, name)
   {
-    currentMagro = this.head;
-    while(currentMagro != this.tail)
-    {
-      if(currentMagro.getName() === name)
-      {
-        console.log("Magro found");
-        return currentMagro; //we found it here
-      }
-      else if(currentMagro.hasAlongside == true)
-      {
-        alongside = currentMagro.alongside;
-        if(alongside.getName === name)
-        {
-          console.log("Magro found");
-          return alongside; //we found it in its sibling
-        }
-      }
-      currentMagro = currentMagro.lower;
-    }
-    //failure
-    console.log("Magro not found");
-    return null;
+    return name1 === name;
   }
-
-  this.removeByName = function(name)
+  var foundMagro = heap.find(checkName);
+  if(!foundMagro) //falsey value
   {
-    pointOfInterest = findByName(name);
-    if(pointOfInterest == null)
-    {
-      console.log("Magro removal failed");
-      return this.head;
-    }
-    else
-    {
-      upper = pointOfInterest.upper;
-      lower = pointOfInterest.lower;
-      
-      
-      if(upper == null && lower == null)
-      {
-        //one level
-        if(pointOfInterest.hasAlongside())
-        {
-          //move the head and tail to the sibling
-          alongside = pointOfInterest.Alongside();
-          this.head  = alongside;
-          this.tail = lower;
-          this._size--;
-          console.log("Magro removed");
-          return this.head;
-        }
-        //otherwise we're deleting this thing
-        this.head = null;
-        this.tail = null;
-        this._size--;
-        console.log("Hierarchy cleared");
-        return null;
-      }
-      else if(upper == null && lower != null)
-      {
-        //head
-        if(pointOfInterest.hasAlongside())
-        {
-          //move the head to the sibling
-          alongside = pointOfInterest.Alongside();
-          lower.upper = alongside;
-          alongside.alongside = null;
-          this.head = alongside;
-          this._size--;
-          console.log("Magro removed");
-          return this.head;
-        }
-        //otherwise just remove the head
-        lower.upper = null;
-        this.head = lower;
-        this._size--;
-        console.log("Magro removed");
-        return this.head;
-      }
-      else if(upper != null && lower == null)
-      {
-        //tail
-        if(pointOfInterest.hasAlongside())
-        {
-          //move the tail to the sibling
-          alongside = pointOfInterest.Alongside();
-          upper.lower = alongside;
-          alongside.alongside = null;
-          this.tail = alongside;
-          this._size--;
-          console.log("Magro removed");
-          return this.head;
-        }
-        //otherwise just remove the head
-        upper.lower = null;
-        this.tail = upper;
-        this._size--;
-        console.log("Magro removed");
-        return this.head;
-      
-     }
-     else  //neither of them are null
-     {
-        if(pointOfInterest.hasAlongside())
-        {
-          //move the links to the sibling
-          alongside = pointOfInterest.Alongside();
-          upper.lower = alongside;
-          lower.upper = alongside;
-          alongside.alongside = null;
-          this._size--;
-          console.log("Magro removed");
-          return this.head;
-        }
-        //otherwise just connect the links vertically
-        upper.lower = lower;
-        lower.upper = upper;
-        this._size--;
-        console.log("Magro removed");
-        return this.head;
-     }
-   }
+    return "Specified Magro was not found";
   }
-
+  else
+  {
+    return foundMagro;
+  }
 }
+
 
 var myDynamoSession = new DynamoSession();
 
