@@ -5,7 +5,7 @@
  * Magro.js is responsible for:
  * -managing incoming macro-task data
  * -making data readable and accessible
- * -implement a heap for this 
+ * -implementing a heap for it all
  */
 var Magro = function(name, deadline, startDate, priority, description)
 {
